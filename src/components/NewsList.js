@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import NewsItem from './NewsItem'
 import axios from 'axios'
-require('dotenv').config()
 
 const NewsListBlock = styled.div`
   box-sizing: border-box;  /* 박스의 크기를 어떤 것을 기준으로 계산할지를 정하는 속성. border-box 테두리를 기준으로 크기를 정한다. */
@@ -30,7 +29,7 @@ function NewsList () {
     const fetchData = async () => {
       setLoading(true)
       try {
-        const response = await axios.get(`https://newsapi.org/v2/top-headlines?country=kr&apiKey=${process.env.NEWS_KEY}`)
+        const response = await axios.get(`https://newsapi.org/v2/top-headlines?country=kr&apiKey=${process.env.REACT_APP_NEWS_KEY}`)  // .env 파일 안에 있는 값은 리액트에서 REACT_APP_으로 시작되어야 인식이 된다. dotenv 따로 쓸 필요 없다.
         setArticles(response.data.articles)
       } catch (e) {
         console.log(e)
