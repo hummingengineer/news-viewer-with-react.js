@@ -29,8 +29,8 @@ function NewsList ({ category }) {
     const fetchData = async () => {
       setLoading(true)
       try {
-        const query = category === 'all' ? '' : `category=${category}`
-        const response = await axios.get(`https://newsapi.org/v2/top-headlines?country=kr&${query}&apiKey=${process.env.REACT_APP_NEWS_KEY}`)  // .env 파일 안에 있는 값은 리액트에서 REACT_APP_으로 시작되어야 인식이 된다. dotenv 따로 쓸 필요 없다.
+        const query = category === 'all' ? '' : `&category=${category}`
+        const response = await axios.get(`https://newsapi.org/v2/top-headlines?country=kr${query}&apiKey=${process.env.REACT_APP_NEWS_KEY}`)  // .env 파일 안에 있는 값은 리액트에서 REACT_APP_으로 시작되어야 인식이 된다. dotenv 따로 쓸 필요 없다.
         setArticles(response.data.articles)
       } catch (e) {
         console.log(e)
