@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 
 const categories = [
-  { name: 'all', text: '전체보기' },
+  { name: 'all', text: '전체보기' },  // name은 실제 카테고리 값을 가리키고, text 값은 렌더링할 때 사용할 한글 카테고리를 가리킨다.
   { name: 'business', text: '비즈니스' },
   { name: 'entertainment', text: '엔터테인먼트' },
   { name: 'health', text: '건강' },
@@ -34,6 +34,7 @@ const Category = styled.div`
     color: #495057;
   }
 
+  /* 다음 코드는 active 값이 true일 때, 특정 스타일을 부여해 준다. */
   ${props =>
     props.active && css`
       font-weight: 600;
@@ -53,7 +54,7 @@ function Categories ({ onSelect, category }) {
   return (
     <CategoriesBlock>
       {categories.map(c => {
-        <Category key={c.name} active={category === c.name} onClick={() => onSelect(c.name)}>{c.text}</Category>
+        <Category key={c.name} active={category === c.name} onClick={() => onSelect(c.name)}>{c.text}</Category>  // active는 마우스로 클릭한 상태. active는 props로 styled-component에게 전달된다.
       })}
     </CategoriesBlock>
   )
