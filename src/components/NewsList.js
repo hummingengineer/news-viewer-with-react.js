@@ -16,7 +16,7 @@ const NewsListBlock = styled.div`
   }
 `;
 
-function NewsList () {
+function NewsList ({ category }) {
   const [articles, setArticles] = useState(null)  // 기본 값은 null
   const [loading, setLoading] = useState(false)  // 요청이 대기 중일 때는 loading이라는 값이 true가 되고, 요청이 끝나면 loading 값이 false가 되어야 한다.
 
@@ -29,7 +29,8 @@ function NewsList () {
     const fetchData = async () => {
       setLoading(true)
       try {
-        const response = await axios.get(`https://newsapi.org/v2/top-headlines?country=kr&apiKey=${process.env.REACT_APP_NEWS_KEY}`)  // .env 파일 안에 있는 값은 리액트에서 REACT_APP_으로 시작되어야 인식이 된다. dotenv 따로 쓸 필요 없다.
+        const query = category === 'all' ? '' : `category=${category}`
+        const response = await axios.get(`https://newsapi.org/v2/top-headlines?country=kr&${query}&apiKey=${process.env.REACT_APP_NEWS_KEY}`)  // .env 파일 안에 있는 값은 리액트에서 REACT_APP_으로 시작되어야 인식이 된다. dotenv 따로 쓸 필요 없다.
         setArticles(response.data.articles)
       } catch (e) {
         console.log(e)
@@ -38,7 +39,7 @@ function NewsList () {
     }
 
     fetchData()
-  }, [])
+  }, [category])  // category 값이 바뀔 때마다 뉴스를 새로 불러와야 하기 때문에 useEffect의 의존 배열에 category를 넣어 주어야 한다.
 
   if (loading) return <NewsListBlock>대기 중...</NewsListBlock>  // 대기 중일 때
   if (!articles) return null                                     // 아직 articles 값이 설정 되지 않았을 때. map 함수를 사용하기 전에 꼭 !articles를 조회하여 해당 값이 현재 null인지 아닌지 검사해야 한다.
