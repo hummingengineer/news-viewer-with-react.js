@@ -39,7 +39,7 @@ function NewsList ({ category }) {
     }
 
     fetchData()
-  }, [category])  // category 값이 바뀔 때마다 뉴스를 새로 불러와야 하기 때문에 useEffect의 의존 배열에 category를 넣어 주어야 한다.
+  }, [category])  // category 값이 바뀔 때마다 뉴스를 새로 불러와야 하기 때문에 useEffect의 의존 배열에 category를 넣어 주어야 한다. useEffect 한 번으로 컴포넌트가 맨 처음 렌더링될 때, 그리고 category 값이 바뀔 때 요청하도록 설정해줄 수 있다.
 
   if (loading) return <NewsListBlock>대기 중...</NewsListBlock>  // 대기 중일 때
   if (!articles) return null                                     // 아직 articles 값이 설정 되지 않았을 때. map 함수를 사용하기 전에 꼭 !articles를 조회하여 해당 값이 현재 null인지 아닌지 검사해야 한다.
