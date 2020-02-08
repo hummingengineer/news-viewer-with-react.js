@@ -10,14 +10,14 @@ const NewsListBlock = styled.div`
   width: 768px;
   margin: 0 auto;
   margin-top: 2rem;
-  @media screen and (max-width: 768px) {  // /* 미디어 타입이 스크린이고, 화면의 최대 너비를 768px로 지정. 그러므로 화면의 너비 768px 이하 일때가 적용이 된다. 그 조건이 맞으면 {...}  안의 스타일이 적용된다. */
+  @media screen and (max-width: 768px) {  /* 미디어 타입이 스크린이고, 화면의 최대 너비를 768px로 지정. 그러므로 화면의 너비 768px 이하 일때가 적용이 된다. 그 조건이 맞으면 {...}  안의 스타일이 적용된다. */
     width: 100%;
     padding-left: 1rem;
     padding-right: 1rem;
   }
 `;
 
-const NewsList = ({ category }) => {
+function NewsList ({ category }) {
   const [loading, response, error] = usePromise(() => {
     const query = category === 'all' ? '' : `&category=${category}`
     return axios.get(`https://newsapi.org/v2/top-headlines?country=kr${query}&apiKey=${process.env.REACT_APP_NEWS_KEY}`)

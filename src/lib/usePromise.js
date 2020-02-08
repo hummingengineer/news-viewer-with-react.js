@@ -24,6 +24,7 @@ export default function usePromise(promiseCreator, deps) {
     }
 
     process()
+    // eslint-disable-next-line
   }, deps)  // deps 배열은 useEffect 의 두번째 파라미터로 전달된다. 여기로 [category] 값이 전달되어, category 값이 바뀔 때마다 뉴스를 새로 불러올 수 있게 된다. useEffect 한 번으로 컴포넌트가 맨 처음 렌더링될 때, 그리고 category 값이 바뀔 때 요청하도록 설정해줄 수 있다.
 
   return [loading, resolved, error]
